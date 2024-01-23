@@ -44,10 +44,10 @@ public class CadeteriaController : ControllerBase
     }
 
 // ● [Get] GetInforme() => Retorna un objeto Informe
-    [HttpGet("GetInforme", Name = "GetInforme")]
-    public ActionResult<string> GetInforme(){
-        return Ok(cadeteria.GetInforme());
-    }
+    // [HttpGet("GetInforme", Name = "GetInforme")]
+    // public ActionResult<string> GetInforme(){
+    //     return Ok(cadeteria.GetInforme());
+    // }
 
 // ● [Post] AgregarPedido(Pedido pedido)
 
