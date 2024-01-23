@@ -1,0 +1,26 @@
+[
+    {
+        "Id": 1,
+        "Nombre": "Martin Palermo",
+        "Direccion": "Av. Alem 200",
+        "Telefono": "381212121"
+    },
+    {
+        "Id": 2,
+        "Nombre": "Jimena Villaruel",
+        "Direccion": "Calle República de Francia 23",
+        "Telefono": "3816551401"
+    },
+    {
+        "Id": 3,
+        "Nombre": "Franco Gomez",
+        "Direccion": "Av. Roca 2300",
+        "Telefono": "3814579844"
+    },
+    {
+        "Id": 4,
+        "Nombre": "Rocio Campo",
+        "Direccion": "Calle Maipú 700",
+        "Telefono": "3815567830"
+    }
+]
