@@ -1,7 +1,9 @@
+using System.ComponentModel;
 using System.Linq;
 using Entidades;
 using ManejoDatos;
-using APICadeteria;
+using System.Text;
+// using APICadeteria;
 
 namespace Entidades
 {
@@ -21,8 +23,8 @@ namespace Entidades
             if (instancia == null)
             {
                 AccesoADatos helperJson = new AccesoJson();
-                Cadeteria cadeteria = helperJson.GetCadeteria("data/Cadeteria.json");
-                cadeteria.Cadetes = helperJson.GetCadetes("data/Cadetes.json");
+                instancia = helperJson.GetCadeteria("data/Cadeteria.json");
+                instancia.Cadetes = helperJson.GetCadetes("data/Cadetes.json");
             }
             return instancia;
         }
@@ -46,11 +48,17 @@ namespace Entidades
             return "Cadeteria "+ Nombre + "- Telefono : " + Telefono + "- Cantidad de cadetes : " + Cadetes.Count() + "\n"; 
         }   
 
-        public Pedido CrearPedido(string obs, string nombreCliente, string DireccionCliente, string TelefonoCliente, string DatosReferenciaDireccion){
+        // public Pedido CrearPedido(string obs, string nombreCliente, string DireccionCliente, string TelefonoCliente, string DatosReferenciaDireccion){
 
-            Pedido pedido = new Pedido(obs,nombreCliente,DireccionCliente,TelefonoCliente,DatosReferenciaDireccion);
-            ListadoPedidos.Add(pedido);
-            return pedido;
+        //     Pedido pedido = new Pedido(obs,nombreCliente,DireccionCliente,TelefonoCliente,DatosReferenciaDireccion);
+        //     ListadoPedidos.Add(pedido);
+        //     return pedido;
+        // }
+
+        public bool AgregarPedido(Pedido nuevoPedido){
+            if (nuevoPedido == null) return false;
+            ListadoPedidos.Add(nuevoPedido);
+            return true;    
         }
 
 
@@ -85,6 +93,7 @@ namespace Entidades
                 pedido.CambiarEstado(3);                
             }
         }
+
 
         public void ReasignarPedido(int idCadete, int numeroPedido){
             Pedido pedido = BuscarPedido(numeroPedido);
@@ -136,5 +145,34 @@ namespace Entidades
             return jornal;
         }
         
+        public string GetInforme()
+        {
+            double montoTotal = 0;
+            int totalEnvios = 0;
+            string informe = "Informe de Pedidos:\n";
+
+            foreach (Cadete cadete in Cadetes)
+            {
+                int enviosCadete = cadete.CantPedidosEntregados;
+                double montoCadete = JornalACobrar(cadete.Id);
+
+                informe += $"Cadete: {cadete.Nombre}\n";
+                informe += $"Cantidad de Envíos: {enviosCadete}\n";
+                informe += $"Monto Ganado: ${montoCadete}\n\n";
+
+                totalEnvios += enviosCadete;
+                montoTotal += montoCadete;
+            }
+
+            double promedioEnviosPorCadete = (double)totalEnvios / Cadetes.Count;
+
+            informe += "Resumen General:\n";
+            informe += $"Total de Envíos: {totalEnvios}\n";
+            informe += $"Monto Total Ganado: ${montoTotal}\n";
+            informe += $"Cantidad Promedio de Envíos por Cadete: {promedioEnviosPorCadete:F2}";
+
+            return informe;
+        }
+
     }
 }

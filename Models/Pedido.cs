@@ -49,7 +49,7 @@ namespace Entidades
                 break; 
                 case 2: Estado = Estado.asignado;
                 break ;
-                case 3: Estado = Estado.entregado;
+                default: Estado = Estado.entregado;
                         cadete.pedidoEntregado();
                 break ;
                 // default: Estado = Estado.cancelado;
