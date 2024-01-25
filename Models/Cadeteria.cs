@@ -14,6 +14,7 @@ namespace Entidades
         public string Telefono {get; set;}
         public List<Cadete> Cadetes {get; set;}
         public List<Pedido> ListadoPedidos {get; set;} 
+        public int CantidadDePedidos {get; set;}
         // AccesoADatos HelperPedidos = new();
 
         //PATRON SINGLETON
@@ -41,6 +42,7 @@ namespace Entidades
             Telefono = telefono;
             Cadetes = new List<Cadete>();
             ListadoPedidos = new List<Pedido>();
+            CantidadDePedidos = 0;
         }
 
 
@@ -57,6 +59,9 @@ namespace Entidades
 
         public bool AgregarPedido(Pedido nuevoPedido){
             if (nuevoPedido == null) return false;
+
+            CantidadDePedidos++;
+            nuevoPedido.Nro = CantidadDePedidos;            
             ListadoPedidos.Add(nuevoPedido);
             return true;    
         }
@@ -133,16 +138,17 @@ namespace Entidades
         }
 
         public double JornalACobrar(int idCadete){
-            int jornal=0;
             Cadete cadete = BuscarCadetePorId(idCadete);
-            foreach (var item in ListadoPedidos)
+            if (cadete != null)
             {
-                if (item.Estado==Estado.entregado && item.cadete==cadete)
-                {
-                    jornal+=500;
-                }
+
+                return 500 * cadete.CantPedidosEntregados;
             }
-            return jornal;
+            else
+            {
+                return -1;
+            }
+
         }
         
         public string GetInforme()
