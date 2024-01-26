@@ -64,7 +64,7 @@ namespace Entidades
         }
 
         public void DesasignarCadete(){
-            Cadete=null;
+            this.Cadete=null;
         }
 
         

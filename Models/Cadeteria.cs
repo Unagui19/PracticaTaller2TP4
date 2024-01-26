@@ -15,7 +15,7 @@ namespace Entidades
         public List<Cadete> Cadetes {get; set;}
         public List<Pedido> ListadoPedidos {get; set;} 
         public int CantidadDePedidos {get; set;}
-        // AccesoADatos HelperPedidos = new();
+        public AccesoADatosPedidos HelperPedidos = new();
 
         //PATRON SINGLETON
         private static Cadeteria instancia;
@@ -23,9 +23,10 @@ namespace Entidades
         public static Cadeteria GetInstancia(){
             if (instancia == null)
             {
-                AccesoADatos helperJson = new AccesoJson();
-                instancia = helperJson.GetCadeteria("data/Cadeteria.json");
-                instancia.Cadetes = helperJson.GetCadetes("data/Cadetes.json");
+                AccesoADatosCadeteria helperCadeteria = new AccesoADatosCadeteria();
+                AccesoADatosCadetes helperCadetes = new AccesoADatosCadetes();
+                instancia = helperCadeteria.Obtener();
+                instancia.Cadetes = helperCadetes.Obtener();
             }
             return instancia;
         }
@@ -62,10 +63,11 @@ namespace Entidades
 
             CantidadDePedidos++;
             nuevoPedido.Nro = CantidadDePedidos;      
-        if (ListadoPedidos == null) {
-        ListadoPedidos = new List<Pedido>();
-        }      
+            if (ListadoPedidos == null) {
+             ListadoPedidos = new List<Pedido>();
+            }      
             ListadoPedidos.Add(nuevoPedido);
+            HelperPedidos.guardarPedidos(ListadoPedidos);
             return true;    
         }
 
@@ -80,6 +82,7 @@ namespace Entidades
                     pedido.AsignarCadete(cadete);
                 }
             }
+            HelperPedidos.guardarPedidos(ListadoPedidos);
         }
 
         public Cadete BuscarCadetePorId(int idCadete){
@@ -109,6 +112,7 @@ namespace Entidades
                 pedido.DesasignarCadete();
                 pedido.AsignarCadete(BuscarCadetePorId(idCadete));
             }
+            HelperPedidos.guardarPedidos(ListadoPedidos);
         }
 
 
@@ -129,6 +133,7 @@ namespace Entidades
                         pedido.CambiarEstado(estado);                
                     }
                 }
+                HelperPedidos.guardarPedidos(ListadoPedidos);
         }
 
         public Pedido BuscarPedido(int nroPedido){

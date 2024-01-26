@@ -27,7 +27,7 @@ namespace ManejoDatos
     {
         public Cadeteria Obtener()
         {
-            return GetCadeteria("datos/cadeteria.json");
+            return GetCadeteria("data/cadeteria.json");
         }
 
     }
@@ -36,33 +36,33 @@ namespace ManejoDatos
     {
         public List<Cadete> Obtener()
         {
-            return GetCadetes("datos/Cadetes.json");
+            return GetCadetes("data/Cadetes.json");
         }
 
     }
 
-    // public class AccesoADatosPedidos:AccesoJson
-    // {
-    //     public void guardarPedidos(List<Pedido> pedidos)
-    //     {    
-    //         var fst = new FileStream("datos/pedidos.json",FileMode.OpenOrCreate);
-    //         var options = new JsonSerializerOptions { WriteIndented = true };
-    //         string archivoJson = JsonSerializer.Serialize(pedidos,options);
-    //         using (var sw =new StreamWriter(fst))
-    //         {
-    //             sw.WriteLine(archivoJson);
-    //             sw.Close();
-    //         }//PARA CREAR UN JSON y guardar o solo guardar 
-    //         fst.Close();
-    //     }
-    //     public List<Pedido> Obtener()
-    //     {
-    //         string textoJson = File.ReadAllText("datos/pedidos.json");
-    //         List<Pedido> pedidos= JsonSerializer.Deserialize<List<Pedido>>(textoJson); 
-    //         // Console.WriteLine($"{cadeteria.Nombre},{cadeteria.Telefono},{cadeteria.Code}");
-    //         return pedidos; 
-    //     }
+    public class AccesoADatosPedidos:AccesoJson
+    {
+        public void guardarPedidos(List<Pedido> pedidos)
+        {    
+            var fst = new FileStream("data/Pedidos.json",FileMode.OpenOrCreate);
+            var options = new JsonSerializerOptions { WriteIndented = true };//para que quede bien identado el json
+            string archivoJson = JsonSerializer.Serialize(pedidos,options);// se pone la opcion aqui
+            using (var sw =new StreamWriter(fst))
+            {
+                sw.WriteLine(archivoJson);
+                sw.Close();
+            }//PARA CREAR UN JSON y guardar o solo guardar 
+            fst.Close();
+        }
+        public List<Pedido> Obtener()
+        {
+            string textoJson = File.ReadAllText("data/Pedidos.json");
+            List<Pedido> pedidos= JsonSerializer.Deserialize<List<Pedido>>(textoJson); 
+            // Console.WriteLine($"{cadeteria.Nombre},{cadeteria.Telefono},{cadeteria.Code}");
+            return pedidos; 
+        }
 
-    // }
+    }
     
 }
