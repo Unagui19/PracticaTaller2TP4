@@ -12,12 +12,13 @@ namespace Entidades
         public string Obs { get ; set; }
         public Estado Estado { get ; set; }
         public Cliente Cliente { get ; set; }
-        public Cadete cadete {get; set;}
+        public Cadete Cadete {get; set;}
 
         public Pedido(string obs, string nombreCliente, string DireccionCliente, string TelefonoCliente, string DatosReferenciaDireccion)
         {
             id++;
             Nro = id;
+            Obs=obs;
             Estado = Estado.pendiente;
             Cliente = new Cliente(nombreCliente, DireccionCliente, TelefonoCliente, DatosReferenciaDireccion);
         }
@@ -50,7 +51,7 @@ namespace Entidades
                 case 2: Estado = Estado.asignado;
                 break ;
                 default: Estado = Estado.entregado;
-                        cadete.pedidoEntregado();
+                        Cadete.pedidoEntregado();
                 break ;
                 // default: Estado = Estado.cancelado;
                 // break;
@@ -58,13 +59,12 @@ namespace Entidades
         }
 
         public void AsignarCadete(Cadete cadete){
-            this.cadete=cadete;
-            CambiarEstado(1);
+            Cadete=cadete;
+            CambiarEstado(2);
         }
 
         public void DesasignarCadete(){
-            this.cadete=null;
-            CambiarEstado(2);
+            Cadete=null;
         }
 
         

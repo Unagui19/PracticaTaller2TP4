@@ -61,7 +61,10 @@ namespace Entidades
             if (nuevoPedido == null) return false;
 
             CantidadDePedidos++;
-            nuevoPedido.Nro = CantidadDePedidos;            
+            nuevoPedido.Nro = CantidadDePedidos;      
+        if (ListadoPedidos == null) {
+        ListadoPedidos = new List<Pedido>();
+        }      
             ListadoPedidos.Add(nuevoPedido);
             return true;    
         }
@@ -93,7 +96,7 @@ namespace Entidades
 
 
         public void ConfirmarEntrega(Pedido pedido){
-            if (pedido.cadete!=null)
+            if (pedido.Cadete!=null)
             {
                 pedido.CambiarEstado(3);                
             }
@@ -102,8 +105,10 @@ namespace Entidades
 
         public void ReasignarPedido(int idCadete, int numeroPedido){
             Pedido pedido = BuscarPedido(numeroPedido);
-            pedido.DesasignarCadete();
-            pedido.AsignarCadete(BuscarCadetePorId(idCadete));
+            if (pedido != null){
+                pedido.DesasignarCadete();
+                pedido.AsignarCadete(BuscarCadetePorId(idCadete));
+            }
         }
 
 

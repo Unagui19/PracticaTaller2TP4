@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Entidades;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace cadeteriaApi.Controllers;
 
@@ -107,7 +108,7 @@ public class CadeteriaController : ControllerBase
 // ● [Put] CambiarCadetePedido(int idPedido,int idNuevoCadete)
     [HttpPut]
     [Route ("CambiarCadetePedido")] 
-    public ActionResult<bool> CambiarCadetePedido(int nroPedido, int idNuevoCadete){
+    public ActionResult<Pedido> CambiarCadetePedido(int nroPedido, int idNuevoCadete){
         // Pedido pedido = cadeteria.BuscarPedido(nroPedido);
        if (cadeteria.BuscarPedido(nroPedido) != null)
         {
