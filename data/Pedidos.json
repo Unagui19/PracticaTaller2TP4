@@ -2,7 +2,7 @@
   {
     "Nro": 1,
     "Obs": "string",
-    "Estado": 3,
+    "Estado": 1,
     "Cliente": {
       "Nombre": "string",
       "Direccion": "string",
@@ -10,17 +10,17 @@
       "DatosReferenciaDireccion": "string"
     },
     "Cadete": {
-      "Id": 1,
-      "Nombre": "Martin Palermo",
-      "Direccion": "Av. Alem 200",
-      "Telefono": "381212121",
-      "CantPedidosEntregados": 1
+      "Id": 0,
+      "Nombre": "string",
+      "Direccion": "string",
+      "Telefono": "string",
+      "CantPedidosEntregados": 0
     }
   },
   {
     "Nro": 2,
     "Obs": "string",
-    "Estado": 2,
+    "Estado": 1,
     "Cliente": {
       "Nombre": "string",
       "Direccion": "string",
@@ -28,11 +28,15 @@
       "DatosReferenciaDireccion": "string"
     },
     "Cadete": {
-      "Id": 1,
-      "Nombre": "Martin Palermo",
-      "Direccion": "Av. Alem 200",
-      "Telefono": "381212121",
-      "CantPedidosEntregados": 1
+      "Id": 0,
+      "Nombre": "string",
+      "Direccion": "string",
+      "Telefono": "string",
+      "CantPedidosEntregados": 0
+    }
+  }
+]
+dosEntregados": 1
     }
   }
 ]

@@ -71,6 +71,17 @@ namespace Entidades
             return true;    
         }
 
+        public bool AgregarCadete(Cadete nuevoCadete){
+            if (nuevoCadete == null) return false;
+
+            nuevoCadete.Id = Cadetes.Count + 1;      
+            if (Cadetes == null) {
+                Cadetes = new List<Cadete>();
+            }      
+            Cadetes.Add(nuevoCadete);
+            return true;    
+        }
+
 
         public void AsignarCadeteAPedido(int nroPedido, int idCadete){
             Cadete cadete = BuscarCadetePorId(idCadete);

@@ -128,4 +128,34 @@ public class CadeteriaController : ControllerBase
         }  
     }
 
+    // [Get] GetPedido/{id} : devuelve un pedido especificado por el id
+    // [HttpGet (" GetPedido/{id} ", Name = "GetPedido")] 
+    [HttpGet]
+    [Route ("GetPedido")]
+    public ActionResult<Pedido> GetPedido(int nroPedido){
+        return Ok(cadeteria.BuscarPedido(nroPedido));
+    }
+
+    // ● [Get] GetCadete/{id} : devuelve un cadete especificado por el id
+    [HttpGet ("GetCadete/{id}", Name = "GetCadete")] 
+    public ActionResult<Pedido> GetCadete(){
+        // return Ok(cadeteria.BuscarCadetePorId(id));
+         return Ok (cadeteria.BuscarCadetePorId(Convert.ToInt32(HttpContext.Request.RouteValues["id"])));//para usar el parametro de la etiqueta directamente
+    }
+
+    // ● [Post] AddCadete : agrega un cadete nuevo a la cadetería.
+    [HttpPost] 
+    [Route("AddCadete")]
+    public ActionResult<string> AddCadete(Cadete nuevoCadete){
+        bool agregado = cadeteria.AgregarCadete(nuevoCadete);
+        if (agregado)
+        {
+            return Ok("Cadete agregado con exito");        
+        }
+        else
+        {
+            return BadRequest("No se pudo agregar el cadete deseado");      
+        }   
+    }
+
 }
